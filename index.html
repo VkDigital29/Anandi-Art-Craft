@@ -24,8 +24,33 @@
 
 <!-- Favicon -->
 <link rel="icon" type="image/x-icon" href="favicon/favicon48.ico">
+<style>
+   .anandi-home .home-logo-image {
+  display: block;
+  width: 100%;
+  max-width: 300px;
+  max-height: 120px;
+  height: auto;
+  object-fit: contain;
+}
 
-</head><body><div class="container">
+.anandi-home .home-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  text-decoration: none;
+}
+
+@media (max-width: 560px) {
+  .anandi-home .home-logo-image {
+    max-width: 230px;
+    max-height: 90px;
+  }
+} 
+</style>
+</head>
+    <body>
+        <div class="container">
 <!-- =========================
      HEADER / NAVIGATION
 ========================== -->
@@ -46,7 +71,11 @@
         </nav>
 </header>
 
-
+<img
+    src="Img/Anandi logo.svg"
+    alt="Anandi Art & Craft Logo"
+    class="home-logo-image"
+  >
 <!-- =========================
      FOOTER
 ========================== -->

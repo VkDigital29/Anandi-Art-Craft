@@ -25,6 +25,665 @@
 <!-- Favicon -->
 <link rel="icon" type="image/x-icon" href="favicon/favicon48.ico">
 <style>
+    /* ========================================
+   ANANDI ART & CRAFT — HOMEPAGE
+   Independent styling; preserves style1.css
+======================================== */
+
+.anandi-home {
+    --home-cream: #fffaf3;
+    --home-paper: #f5eee4;
+    --home-terracotta: #b86f52;
+    --home-terracotta-dark: #94543d;
+    --home-sage: #87917a;
+    --home-ink: #342d29;
+    --home-muted: #786e65;
+    --home-white: #ffffff;
+
+    background: var(--home-cream);
+    color: var(--home-ink);
+    font-family: inherit;
+    overflow: hidden;
+}
+
+.anandi-home *,
+.anandi-home *::before,
+.anandi-home *::after {
+    box-sizing: border-box;
+}
+
+.anandi-home img {
+    max-width: 100%;
+}
+
+.anandi-home a {
+    text-decoration: none;
+}
+
+.anandi-home .section-eyebrow,
+.anandi-home .hero-eyebrow {
+    display: inline-block;
+    color: var(--home-terracotta);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    line-height: 1.8;
+}
+
+.anandi-home h1,
+.anandi-home h2,
+.anandi-home h3,
+.anandi-home p {
+    margin-top: 0;
+}
+
+.anandi-home h1,
+.anandi-home h2 {
+    color: var(--home-ink);
+    font-family: Georgia, "Times New Roman", serif;
+    font-weight: 500;
+    letter-spacing: -1.2px;
+}
+
+.anandi-home h1 span,
+.anandi-home h2 span {
+    color: var(--home-terracotta);
+    font-style: italic;
+}
+
+
+/* HERO */
+
+.anandi-home .home-hero {
+    width: min(1200px, 100%);
+    margin: 0 auto;
+    padding: 90px 6% 100px;
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    align-items: center;
+    gap: 55px;
+}
+
+.anandi-home .hero-content {
+    max-width: 590px;
+}
+
+.anandi-home .hero-eyebrow {
+    margin-bottom: 22px;
+    padding: 7px 14px;
+    border: 1px solid #ead8c9;
+    border-radius: 30px;
+    background: #fff5eb;
+}
+
+.anandi-home .hero-content h1 {
+    margin-bottom: 24px;
+    font-size: clamp(3rem, 5.5vw, 5.3rem);
+    line-height: 1.05;
+}
+
+.anandi-home .hero-description {
+    max-width: 510px;
+    margin-bottom: 30px;
+    color: var(--home-muted);
+    font-size: 1rem;
+    line-height: 1.9;
+}
+
+.anandi-home .hero-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.anandi-home .home-btn {
+    min-height: 50px;
+    padding: 14px 22px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    font-size: 0.87rem;
+    font-weight: 600;
+    transition: transform 0.25s ease, background 0.25s ease;
+}
+
+.anandi-home .home-btn:hover {
+    transform: translateY(-3px);
+}
+
+.anandi-home .home-btn-primary {
+    background: var(--home-terracotta);
+    color: var(--home-white);
+}
+
+.anandi-home .home-btn-primary:hover {
+    background: var(--home-terracotta-dark);
+}
+
+.anandi-home .home-btn-secondary {
+    border-color: #dfc9b8;
+    color: var(--home-ink);
+    background: transparent;
+}
+
+.anandi-home .home-btn-secondary:hover {
+    background: #f4e9dc;
+}
+
+.anandi-home .hero-note {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin-top: 30px;
+    color: var(--home-muted);
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 0.95rem;
+    font-style: italic;
+}
+
+.anandi-home .hero-note i {
+    color: var(--home-terracotta);
+}
+
+
+/* HERO IMAGE */
+
+.anandi-home .hero-visual {
+    position: relative;
+    min-width: 0;
+    padding: 15px 15px 35px;
+}
+
+.anandi-home .hero-image-main {
+    position: relative;
+    min-height: 390px;
+    overflow: hidden;
+    border-radius: 180px 180px 8px 8px;
+    background: linear-gradient(145deg, #e8d6c4, #c7b59e);
+    box-shadow: 0 20px 55px rgba(79, 54, 38, 0.12);
+}
+
+.anandi-home .hero-image-main img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.anandi-home .hero-image-main.image-placeholder {
+    background:
+        radial-gradient(circle at 50% 35%, #fff6e8 0 12%, transparent 12.5%),
+        linear-gradient(145deg, #d5c7b2, #b7a28b);
+}
+
+.anandi-home .image-placeholder-label {
+    position: absolute;
+    right: 15px;
+    bottom: 20px;
+    left: 15px;
+    color: #594638;
+    text-align: center;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.2rem;
+    font-style: italic;
+}
+
+.anandi-home .hero-floating-card {
+    position: absolute;
+    right: -5px;
+    bottom: 4px;
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    padding: 16px 20px;
+    border: 1px solid #eee3d8;
+    border-radius: 8px;
+    background: var(--home-white);
+    box-shadow: 0 12px 35px rgba(57, 43, 32, 0.1);
+}
+
+.anandi-home .floating-icon {
+    width: 44px;
+    height: 44px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: #f7e8dc;
+    color: var(--home-terracotta);
+}
+
+.anandi-home .hero-floating-card strong,
+.anandi-home .hero-floating-card small {
+    display: block;
+}
+
+.anandi-home .hero-floating-card strong {
+    margin-bottom: 5px;
+    font-size: 0.9rem;
+}
+
+.anandi-home .hero-floating-card small {
+    color: var(--home-muted);
+    font-size: 0.76rem;
+}
+
+.anandi-home .hero-decoration {
+    position: absolute;
+    color: var(--home-terracotta);
+    font-family: Georgia, "Times New Roman", serif;
+}
+
+.anandi-home .hero-decoration-one {
+    top: 0;
+    right: 4px;
+    font-size: 3rem;
+}
+
+.anandi-home .hero-decoration-two {
+    bottom: 75px;
+    left: -5px;
+    font-size: 2.5rem;
+}
+
+
+/* BRAND INTRODUCTION */
+
+.anandi-home .home-intro {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    align-items: start;
+    gap: 70px;
+    padding: 85px max(6%, calc((100% - 1050px) / 2));
+    background: var(--home-paper);
+}
+
+.anandi-home .home-intro h2,
+.anandi-home .section-heading h2,
+.anandi-home .personalise-content h2,
+.anandi-home .home-final-cta h2 {
+    margin: 15px 0 0;
+    font-size: clamp(2.2rem, 4vw, 3.5rem);
+    line-height: 1.15;
+}
+
+.anandi-home .intro-copy p {
+    margin-bottom: 17px;
+    color: var(--home-muted);
+    font-size: 0.97rem;
+    line-height: 1.9;
+}
+
+.anandi-home .text-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 8px;
+    color: var(--home-terracotta-dark);
+    font-weight: 700;
+}
+
+.anandi-home .text-link i,
+.anandi-home .collection-card a i {
+    transition: transform 0.2s ease;
+}
+
+.anandi-home .text-link:hover i,
+.anandi-home .collection-card a:hover i {
+    transform: translateX(5px);
+}
+
+
+/* COLLECTIONS */
+
+.anandi-home .home-collections {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 95px 6%;
+}
+
+.anandi-home .section-heading {
+    max-width: 650px;
+    margin: 0 auto 45px;
+    text-align: center;
+}
+
+.anandi-home .section-heading h2 {
+    font-size: clamp(2rem, 4vw, 3.2rem);
+}
+
+.anandi-home .section-heading p {
+    margin: 18px 0 0;
+    color: var(--home-muted);
+    line-height: 1.8;
+}
+
+.anandi-home .collection-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 22px;
+}
+
+.anandi-home .collection-card {
+    position: relative;
+    padding: 32px 25px;
+    border: 1px solid #eee3d8;
+    border-radius: 8px;
+    background: #fffdf9;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.anandi-home .collection-card:hover {
+    transform: translateY(-7px);
+    box-shadow: 0 18px 40px rgba(64, 45, 32, 0.08);
+}
+
+.anandi-home .collection-icon {
+    width: 54px;
+    height: 54px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: #f4e6da;
+    color: var(--home-terracotta);
+    font-size: 1.25rem;
+}
+
+.anandi-home .collection-number {
+    position: absolute;
+    top: 32px;
+    right: 25px;
+    color: #c6b5a5;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.2rem;
+}
+
+.anandi-home .collection-card h3 {
+    margin: 25px 0 12px;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.45rem;
+    font-weight: 500;
+}
+
+.anandi-home .collection-card p {
+    min-height: 78px;
+    margin-bottom: 22px;
+    color: var(--home-muted);
+    font-size: 0.9rem;
+    line-height: 1.8;
+}
+
+.anandi-home .collection-card a {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--home-terracotta-dark);
+    font-size: 0.86rem;
+    font-weight: 700;
+}
+
+
+/* PERSONALISATION BANNER */
+
+.anandi-home .home-personalise {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    padding: 48px max(6%, calc((100% - 1050px) / 2));
+    background: #e9e8dd;
+}
+
+.anandi-home .personalise-icon {
+    width: 65px;
+    height: 65px;
+    flex: 0 0 65px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: #fffaf3;
+    color: var(--home-sage);
+    font-size: 1.5rem;
+}
+
+.anandi-home .personalise-content {
+    flex: 1;
+}
+
+.anandi-home .personalise-content h2 {
+    margin-top: 8px;
+    font-size: clamp(1.7rem, 3vw, 2.5rem);
+}
+
+.anandi-home .personalise-content p {
+    max-width: 600px;
+    margin: 12px 0 0;
+    color: #6d6c60;
+    line-height: 1.8;
+}
+
+.anandi-home .home-btn-light {
+    flex-shrink: 0;
+    background: #fffaf3;
+    color: var(--home-ink);
+}
+
+.anandi-home .home-btn-light:hover {
+    background: #ffffff;
+}
+
+
+/* BRAND VALUES */
+
+.anandi-home .home-values {
+    max-width: 1150px;
+    margin: 0 auto;
+    padding: 65px 6%;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 30px;
+    text-align: center;
+}
+
+.anandi-home .value-item {
+    padding: 10px;
+}
+
+.anandi-home .value-item > i {
+    margin-bottom: 15px;
+    color: var(--home-terracotta);
+    font-size: 1.6rem;
+}
+
+.anandi-home .value-item h3 {
+    margin-bottom: 9px;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.25rem;
+    font-weight: 500;
+}
+
+.anandi-home .value-item p {
+    margin-bottom: 0;
+    color: var(--home-muted);
+    font-size: 0.88rem;
+    line-height: 1.7;
+}
+
+
+/* FINAL CTA */
+
+.anandi-home .home-final-cta {
+    padding: 90px 6%;
+    background: #f4e8dc;
+    text-align: center;
+}
+
+.anandi-home .home-final-cta h2 {
+    margin: 17px 0;
+}
+
+.anandi-home .home-final-cta p {
+    margin-bottom: 25px;
+    color: var(--home-muted);
+    line-height: 1.8;
+}
+
+.anandi-home .home-final-cta .home-btn {
+    display: inline-flex;
+}
+
+
+/* RESPONSIVE */
+
+@media (max-width: 900px) {
+    .anandi-home .home-hero {
+        grid-template-columns: 1fr 0.85fr;
+        gap: 25px;
+        padding-top: 65px;
+    }
+
+    .anandi-home .hero-image-main {
+        min-height: 320px;
+    }
+
+    .anandi-home .home-intro {
+        gap: 35px;
+    }
+
+    .anandi-home .collection-grid {
+        gap: 14px;
+    }
+
+    .anandi-home .collection-card {
+        padding: 25px 18px;
+    }
+
+    .anandi-home .home-personalise {
+        flex-wrap: wrap;
+    }
+
+    .anandi-home .personalise-content {
+        min-width: 60%;
+    }
+
+    .anandi-home .home-btn-light {
+        margin-left: 90px;
+    }
+}
+
+@media (max-width: 650px) {
+    .anandi-home .home-hero {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        padding: 55px 6% 65px;
+    }
+
+    .anandi-home .hero-content h1 {
+        font-size: clamp(2.8rem, 12vw, 4.1rem);
+    }
+
+    .anandi-home .hero-description {
+        font-size: 0.94rem;
+    }
+
+    .anandi-home .hero-visual {
+        width: 100%;
+        max-width: 420px;
+        margin: 0 auto;
+    }
+
+    .anandi-home .hero-image-main {
+        min-height: 340px;
+    }
+
+    .anandi-home .hero-floating-card {
+        right: -2px;
+    }
+
+    .anandi-home .home-intro {
+        grid-template-columns: 1fr;
+        gap: 25px;
+        padding: 60px 7%;
+    }
+
+    .anandi-home .home-collections {
+        padding: 65px 6%;
+    }
+
+    .anandi-home .collection-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .anandi-home .collection-card p {
+        min-height: 0;
+    }
+
+    .anandi-home .home-personalise {
+        align-items: flex-start;
+        padding: 40px 7%;
+        gap: 18px;
+    }
+
+    .anandi-home .personalise-icon {
+        width: 48px;
+        height: 48px;
+        flex-basis: 48px;
+        font-size: 1.1rem;
+    }
+
+    .anandi-home .personalise-content {
+        min-width: 0;
+    }
+
+    .anandi-home .home-btn-light {
+        margin-left: 66px;
+    }
+
+    .anandi-home .home-values {
+        grid-template-columns: 1fr;
+        gap: 22px;
+        padding: 50px 7%;
+    }
+
+    .anandi-home .home-final-cta {
+        padding: 65px 7%;
+    }
+}
+
+@media (max-width: 380px) {
+    .anandi-home .hero-buttons {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .anandi-home .hero-buttons .home-btn {
+        width: 100%;
+    }
+
+    .anandi-home .hero-image-main {
+        min-height: 285px;
+    }
+
+    .anandi-home .hero-floating-card {
+        padding: 12px;
+    }
+
+    .anandi-home .home-btn-light {
+        width: 100%;
+        margin-left: 0;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .anandi-home *,
+    .anandi-home *::before,
+    .anandi-home *::after {
+        scroll-behavior: auto !important;
+        transition: none !important;
+    }
+                    }
    .anandi-home .home-logo-image {
   display: block;
   width: 100%;

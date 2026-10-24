@@ -1,0 +1,633 @@
+/* Anandi Art & Craft — Premium Products Page
+   Separate stylesheet; existing CSS remains untouched. */
+
+.products-premium {
+  --ap-cream: #fff8f1;
+  --ap-paper: #fffdf9;
+  --ap-terracotta: #91392f;
+  --ap-terracotta-dark: #70251f;
+  --ap-blush: #f7e1d3;
+  --ap-sage: #647b58;
+  --ap-ink: #40251f;
+  --ap-muted: #80665b;
+  --ap-border: #ecd5c5;
+
+  background: var(--ap-cream);
+  color: var(--ap-ink);
+  min-height: 100vh;
+  font-family: Georgia, "Times New Roman", serif;
+}
+
+.products-premium *,
+.products-premium *::before,
+.products-premium *::after {
+  box-sizing: border-box;
+}
+
+.products-premium button,
+.products-premium input,
+.products-premium select {
+  font: inherit;
+}
+
+.products-premium button {
+  cursor: pointer;
+}
+
+.products-premium .ap-hero {
+  padding: 64px 24px;
+  text-align: center;
+  background:
+    radial-gradient(ellipse at top left, #f4d4bf 0%, transparent 55%),
+    linear-gradient(135deg, #fff3e7, #f9dfd0 55%, #fff8ef);
+}
+
+.products-premium .ap-eyebrow {
+  color: var(--ap-terracotta);
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font: 700 12px/1.6 Arial, sans-serif;
+}
+
+.products-premium .ap-hero h1 {
+  max-width: 800px;
+  margin: 14px auto;
+  color: var(--ap-terracotta-dark);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(36px, 6vw, 66px);
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.1;
+}
+
+.products-premium .ap-hero p {
+  max-width: 590px;
+  margin: 16px auto 24px;
+  color: var(--ap-muted);
+  font-size: 17px;
+  line-height: 1.8;
+}
+
+.products-premium .ap-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  padding: 13px 22px;
+  border: 1px solid var(--ap-terracotta);
+  border-radius: 40px;
+  background: var(--ap-terracotta);
+  color: white;
+  text-decoration: none;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.products-premium .ap-button:hover {
+  background: var(--ap-terracotta-dark);
+  transform: translateY(-2px);
+}
+
+.products-premium .ap-button:focus-visible,
+.products-premium button:focus-visible,
+.products-premium input:focus-visible,
+.products-premium select:focus-visible {
+  outline: 3px solid #c38b65;
+  outline-offset: 3px;
+}
+
+.products-premium .ap-catalogue {
+  max-width: 1400px;
+  margin: auto;
+  padding: 34px 24px 58px;
+}
+
+.products-premium .ap-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 22px;
+}
+
+.products-premium .ap-search {
+  flex: 1 1 230px;
+  max-width: 390px;
+}
+
+.products-premium .ap-search input {
+  width: 100%;
+  padding: 13px 17px;
+  border: 1px solid var(--ap-border);
+  border-radius: 30px;
+  background: var(--ap-paper);
+  color: var(--ap-ink);
+}
+
+.products-premium .ap-sort {
+  padding: 12px 15px;
+  border: 1px solid var(--ap-border);
+  border-radius: 25px;
+  background: var(--ap-paper);
+  color: var(--ap-ink);
+}
+
+.products-premium .ap-categories {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 28px;
+}
+
+.products-premium .ap-category {
+  padding: 10px 17px;
+  border: 1px solid var(--ap-border);
+  border-radius: 30px;
+  background: var(--ap-paper);
+  color: var(--ap-ink);
+  transition: 0.2s;
+}
+
+.products-premium .ap-category:hover,
+.products-premium .ap-category[aria-pressed="true"] {
+  border-color: var(--ap-terracotta);
+  background: var(--ap-terracotta);
+  color: white;
+}
+
+.products-premium .ap-section-title {
+  margin: 0 0 8px;
+  color: var(--ap-terracotta-dark);
+  font-size: clamp(27px, 4vw, 38px);
+  font-weight: 400;
+}
+
+.products-premium .ap-section-subtitle {
+  margin: 0 0 25px;
+  color: var(--ap-muted);
+  line-height: 1.7;
+}
+
+.products-premium .ap-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.products-premium .ap-card {
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid var(--ap-border);
+  border-radius: 17px;
+  background: var(--ap-paper);
+  box-shadow: 0 5px 20px rgb(83 44 27 / 5%);
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+
+.products-premium .ap-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 28px rgb(83 44 27 / 12%);
+}
+
+.products-premium .ap-image-wrap {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 4 / 4.2;
+  background: var(--ap-blush);
+}
+
+.products-premium .ap-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.45s;
+}
+
+.products-premium .ap-card:hover .ap-image {
+  transform: scale(1.045);
+}
+
+.products-premium .ap-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  padding: 6px 11px;
+  border-radius: 30px;
+  background: var(--ap-terracotta);
+  color: white;
+  font: 700 11px/1.2 Arial, sans-serif;
+}
+
+.products-premium .ap-badge.ap-badge-sage {
+  background: var(--ap-sage);
+}
+
+.products-premium .ap-wishlist {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: grid;
+  width: 37px;
+  height: 37px;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  background: rgb(255 253 249 / 94%);
+  color: var(--ap-terracotta);
+  font-size: 21px;
+}
+
+.products-premium .ap-wishlist[aria-pressed="true"] {
+  background: var(--ap-terracotta);
+  color: white;
+}
+
+.products-premium .ap-card-body {
+  padding: 17px;
+}
+
+.products-premium .ap-card h3 {
+  margin: 0 0 8px;
+  color: var(--ap-ink);
+  font-size: 19px;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.products-premium .ap-description {
+  min-height: 44px;
+  margin: 0 0 15px;
+  color: var(--ap-muted);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.products-premium .ap-price-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 15px;
+}
+
+.products-premium .ap-price {
+  color: var(--ap-terracotta);
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.products-premium .ap-stock {
+  color: var(--ap-sage);
+  font: 700 11px/1.4 Arial, sans-serif;
+}
+
+.products-premium .ap-stock.ap-unavailable {
+  color: #a32f2f;
+}
+
+.products-premium .ap-order {
+  display: flex;
+  width: 100%;
+  padding: 12px 9px;
+  border-radius: 30px;
+  font-size: 14px;
+}
+
+.products-premium .ap-order:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.products-premium .ap-empty {
+  grid-column: 1 / -1;
+  padding: 45px 20px;
+  border: 1px dashed var(--ap-border);
+  border-radius: 16px;
+  color: var(--ap-muted);
+  text-align: center;
+}
+
+.products-premium .ap-custom {
+  display: grid;
+  grid-template-columns: 1.5fr auto;
+  align-items: center;
+  gap: 25px;
+  margin-top: 44px;
+  padding: 35px;
+  border: 1px solid var(--ap-border);
+  border-radius: 20px;
+  background: linear-gradient(120deg, #f7e2d2, #fff2e6);
+}
+
+.products-premium .ap-custom h2 {
+  margin: 0 0 10px;
+  color: var(--ap-terracotta-dark);
+  font-size: 30px;
+  font-style: italic;
+  font-weight: 400;
+}
+
+.products-premium .ap-custom p {
+  margin: 0;
+  color: var(--ap-muted);
+  line-height: 1.8;
+}
+
+.products-premium .ap-footer {
+  padding: 27px 20px;
+  border-top: 1px solid var(--ap-border);
+  color: var(--ap-muted);
+  text-align: center;
+  line-height: 1.8;
+}
+
+.products-premium .ap-footer strong {
+  color: var(--ap-terracotta-dark);
+}
+
+@media (max-width: 1050px) {
+  .products-premium .ap-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 720px) {
+  .products-premium .ap-hero {
+    padding: 45px 18px;
+  }
+
+  .products-premium .ap-catalogue {
+    padding: 26px 15px 40px;
+  }
+
+  .products-premium .ap-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .products-premium .ap-card-body {
+    padding: 12px;
+  }
+
+  .products-premium .ap-card h3 {
+    font-size: 16px;
+  }
+
+  .products-premium .ap-description {
+    min-height: 60px;
+    font-size: 13px;
+  }
+
+  .products-premium .ap-price {
+    font-size: 20px;
+  }
+
+  .products-premium .ap-stock {
+    font-size: 10px;
+  }
+
+  .products-premium .ap-order {
+    font-size: 12px;
+  }
+
+  .products-premium .ap-custom {
+    grid-template-columns: 1fr;
+    padding: 24px;
+  }
+}
+
+@media (max-width: 360px) {
+  .products-premium .ap-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =========================================
+   ANANDI ART & CRAFT
+   Premium Product Card Hover Effects
+   ========================================= */
+
+/* Smooth card movement and shadow */
+.products-premium .ap-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 18px;
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease,
+    border-color 0.35s ease;
+}
+
+/* Lift the card on hover */
+.products-premium .ap-card:hover {
+  transform: translateY(-9px);
+  box-shadow: 0 18px 38px rgba(112, 37, 31, 0.18);
+  border-color: #d7aa91;
+}
+
+/* Smooth image zoom */
+.products-premium .ap-image-wrap {
+  overflow: hidden;
+}
+
+.products-premium .ap-image {
+  transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.products-premium .ap-card:hover .ap-image {
+  transform: scale(1.09);
+}
+
+/* Description animation */
+.products-premium .ap-description {
+  opacity: 0.85;
+  transform: translateY(5px);
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
+}
+
+.products-premium .ap-card:hover .ap-description {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Elegant product title */
+.products-premium .ap-card h3 {
+  transition: color 0.3s ease;
+}
+
+.products-premium .ap-card:hover h3 {
+  color: #91392f;
+}
+
+/* Wishlist button effect */
+.products-premium .ap-wishlist {
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease,
+    color 0.25s ease;
+}
+
+.products-premium .ap-card:hover .ap-wishlist {
+  transform: scale(1.08);
+}
+
+/* Order button animation */
+.products-premium .ap-order {
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease;
+}
+
+.products-premium .ap-order:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 7px 16px rgba(112, 37, 31, 0.2);
+}
+
+/* Keyboard accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .products-premium .ap-card,
+  .products-premium .ap-image,
+  .products-premium .ap-description,
+  .products-premium .ap-card h3,
+  .products-premium .ap-wishlist,
+  .products-premium .ap-order {
+    transition: none;
+  }
+}
+/* ===== Product Quick View Modal ===== */
+
+.products-premium .ap-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(45, 26, 21, 0.65);
+  backdrop-filter: blur(6px);
+}
+
+.products-premium .ap-modal.is-open {
+  display: flex;
+  animation: apFadeIn 0.25s ease;
+}
+
+.products-premium .ap-modal-card {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: min(850px, 100%);
+  max-height: 90vh;
+  overflow: auto;
+  border: 1px solid #ecd5c5;
+  border-radius: 22px;
+  background: #fffaf5;
+  box-shadow: 0 25px 80px rgba(0, 0, 0, 0.25);
+  animation: apCardIn 0.3s ease;
+}
+
+.products-premium .ap-modal-image {
+  width: 100%;
+  height: 100%;
+  min-height: 350px;
+  max-height: 540px;
+  object-fit: cover;
+  background: #f7e1d3;
+}
+
+.products-premium .ap-modal-content {
+  align-self: center;
+  padding: 36px;
+}
+
+.products-premium .ap-modal-content h2 {
+  margin: 14px 0;
+  color: #70251f;
+  font-size: clamp(25px, 4vw, 36px);
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+.products-premium .ap-modal-description {
+  color: #80665b;
+  line-height: 1.8;
+}
+
+.products-premium .ap-modal-price {
+  display: block;
+  margin: 20px 0;
+  color: #91392f;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.products-premium .ap-modal-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 2;
+  display: grid;
+  width: 40px;
+  height: 40px;
+  place-items: center;
+  border: 1px solid #ecd5c5;
+  border-radius: 50%;
+  background: #fffaf5;
+  color: #70251f;
+  font-size: 25px;
+  cursor: pointer;
+}
+
+.products-premium .ap-modal-category {
+  color: #647b58;
+  font: 700 12px/1.5 Arial, sans-serif;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+@keyframes apFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes apCardIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (max-width: 600px) {
+  .products-premium .ap-modal {
+    padding: 12px;
+  }
+
+  .products-premium .ap-modal-card {
+    grid-template-columns: 1fr;
+    max-width: 430px;
+  }
+
+  .products-premium .ap-modal-image {
+    height: 230px;
+    min-height: 0;
+  }
+
+  .products-premium .ap-modal-content {
+    padding: 22px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .products-premium .ap-modal,
+  .products-premium .ap-modal-card {
+    animation: none;
+  }

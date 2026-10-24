@@ -1,0 +1,136 @@
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="description"
+    content="ChemistryForAll – A platform for chemistry lovers to explore, learn and understand chemistry.">
+
+<meta name="keywords"
+    content="Chemistry, ChemistryForAll, Organic Chemistry, Inorganic Chemistry, Physical Chemistry, Pharmaceutical Chemistry">
+
+<meta name="author" content="Anandi Art & Craft">
+
+<title>HomePage - Anadi Art & Craft</title>
+
+<!-- Font Awesome -->
+<link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<!-- Custom CSS -->
+<link rel="stylesheet" href="/storage/emulated/0/Anandi Art & Craft/Css/style1.css">
+
+<!-- Favicon -->
+<link rel="icon" type="image/x-icon" href="favicon/favicon48.ico">
+
+</head><body><div class="container">
+<!-- =========================
+     HEADER / NAVIGATION
+========================== -->
+
+<header>
+
+          <a href="index.html" class="brand-logo" aria-label="Anandi Art and Craft home">
+            <span class="logo-icon"><i class="fas fa-seedling" aria-hidden="true"></i></span>
+            <span class="logo-icon"><img src="Img/Anandi logo.svg"></span>
+            <span class="logo-text"><span class="brand-name">Anandi</span><span class="brand-subtitle">ART &amp; CRAFT</span></span>
+        </a>
+        <div id="menu" class="fas fa-bars" role="button" tabindex="0" aria-label="Open navigation menu" aria-expanded="false"></div>
+        <nav class="navbar" aria-label="Main navigation">
+            <a href="index.html" class="active" aria-current="page"><i class="fas fa-home" aria-hidden="true"></i> Home</a>
+            <a href="products.html"><i class="fas fa-store" aria-hidden="true"></i> Products</a>
+            <a href="about.html"><i class="fas fa-heart" aria-hidden="true"></i> About Us</a>
+            <a href="contact.html"><i class="fas fa-envelope" aria-hidden="true"></i> Contact Us</a>
+        </nav>
+</header>
+
+
+<!-- =========================
+     FOOTER
+========================== -->
+
+<section class="footer">
+    
+    <div class="footer-brand">
+            <a href="index.html" class="brand-logo">
+    <span class="logo-icon">
+        <i class="fas fa-seedling"></i>
+    </span>
+        <span class="logo-icon"><img src="Img/Anandi logo.svg"></span>
+            
+
+    <span class="logo-text">
+        <span class="brand-name" style="color:var(--gold)">Anandi</span>
+        <span class="brand-subtitle">ART & CRAFT</span>
+    </span>
+</a>
+            <p>
+                Create • Decorate • Inspire
+            </p>
+        </div>
+        
+        <div class="footer-links">
+
+            <a href="index.html">
+                <i class="fas fa-home"></i> Home
+            </a>
+                <a href="products.html">
+            <i class="fas fa-store"></i>
+            Products
+        </a>
+            <a href="about.html">
+                <i class="fas fa-heart"></i> About
+            </a>
+
+            <a href="contact.html">
+                <i class="fas fa-envelope"></i> Contact
+            </a>
+
+        </div>
+
+    <p class="credit">
+        Made with ♥ and creativity by vkdigital29
+    </p>
+
+    <p class="credit">
+        Copyrights Reserved © Anandi Art & Craft © 2026
+    </p> 
+
+</section>
+
+</div><!-- =========================
+     MOBILE MENU SCRIPT
+========================== --><script>
+
+    const menu = document.querySelector('#menu');
+    const navbar = document.querySelector('.navbar');
+
+    menu.addEventListener('click', () => {
+
+        navbar.classList.toggle('active');
+
+        menu.classList.toggle('fa-bars');
+        menu.classList.toggle('fa-times');
+
+    });
+
+
+    /* Close mobile menu after clicking a link */
+
+    document.querySelectorAll('.navbar a').forEach(link => {
+
+        link.addEventListener('click', () => {
+
+            navbar.classList.remove('active');
+
+            menu.classList.add('fa-bars');
+            menu.classList.remove('fa-times');
+
+        });
+
+    });
+
+</script></body>
+</html>

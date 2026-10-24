@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Discover Anandi Art & Craft — handmade gifts, resin art, and thoughtful home and festival décor.">
+    <meta name="theme-color" content="#fffaf1">
+    <title>About Us | Anandi Art &amp; Craft</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="css/style1.css">
+</head>
+<body>
+    <header>
+        <a href="index.html" class="brand-logo" aria-label="Anandi Art and Craft home">
+            <span class="logo-icon"><i class="fas fa-seedling" aria-hidden="true"></i></span>
+            <span class="logo-text"><span class="brand-name">Anandi</span><span class="brand-subtitle">ART &amp; CRAFT</span></span>
+        </a>
+        <div id="menu" class="fas fa-bars" role="button" tabindex="0" aria-label="Open navigation menu" aria-expanded="false"></div>
+        <nav class="navbar" aria-label="Main navigation">
+            <a href="index.html"><i class="fas fa-home" aria-hidden="true"></i> Home</a>
+            <a href="products.html"><i class="fas fa-store" aria-hidden="true"></i> Products</a>
+            <a href="about.html" class="active" aria-current="page"><i class="fas fa-heart" aria-hidden="true"></i> About Us</a>
+            <a href="contact.html"><i class="fas fa-envelope" aria-hidden="true"></i> Contact Us</a>
+        </nav>
+    </header>
+    <main class="about-page container">
+        <section class="about-hero">
+            <span class="section-tag"><i class="fas fa-sun" aria-hidden="true"></i> THE STORY BEHIND THE CRAFT</span>
+            <h1>Little details.<br><span>Meaningful creations.</span></h1>
+            <p>Welcome to Anandi Art &amp; Craft — a creative space for handmade gifts, expressive resin art, and décor made to bring warmth and personality to your special moments.</p>
+        </section>
+        <section class="about-grid" aria-label="About our brand">
+            <article class="about-card">
+                <div class="about-icon"><i class="fas fa-hands" aria-hidden="true"></i></div>
+                <h2>Made with care</h2>
+                <p>We believe handmade creations can make ordinary moments feel memorable. Each design is approached with care, creativity, and attention to the little details that make a gift feel personal.</p>
+            </article>
+            <article class="about-card">
+                <div class="about-icon"><i class="fas fa-gift" aria-hidden="true"></i></div>
+                <h2>Created for your moments</h2>
+                <p>From customised gifts to decorative accents, our goal is to help you celebrate milestones, festivals, relationships, and everyday joys with something thoughtful and distinctive.</p>
+            </article>
+        </section>
+        <section class="about-box">
+            <div class="about-icon"><i class="fas fa-palette" aria-hidden="true"></i></div>
+            <h2>What you'll find here</h2>
+            <p>Explore creative pieces for gifting, decorating, and adding a personal touch to your space.</p>
+            <div class="about-values">
+                <article class="value-card"><div class="about-icon"><i class="fas fa-gift" aria-hidden="true"></i></div><h3>Handmade &amp; Custom Gifts</h3><p>Thoughtful keepsakes and customised creations for the people and moments that matter.</p></article>
+                <article class="value-card"><div class="about-icon"><i class="fas fa-water" aria-hidden="true"></i></div><h3>Resin Art</h3><p>Decorative resin pieces with colour, texture, and a distinctive handcrafted finish.</p></article>
+                <article class="value-card"><div class="about-icon"><i class="fas fa-home" aria-hidden="true"></i></div><h3>Home &amp; Festival Decor</h3><p>Creative accents to bring a festive feeling and a little extra charm to your surroundings.</p></article>
+            </div>
+        </section>
+        <section class="resin-banner">
+            <div><span class="section-tag"><i class="fas fa-heart" aria-hidden="true"></i> CREATE • DECORATE • INSPIRE</span><h2 style="margin-top:14px;">Have an idea in mind?</h2><p>Let’s turn your inspiration into something personal. Get in touch to discuss a customised creation or a gift idea.</p></div>
+            <a class="btn" href="contact.html">Let's talk <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+        </section>
+    </main>
+    <footer class="footer">
+        <div class="footer-brand">
+            <a href="index.html" class="brand-logo" aria-label="Anandi Art and Craft home">
+                <span class="logo-icon"><i class="fas fa-seedling" aria-hidden="true"></i></span>
+                <span class="logo-text"><span class="brand-name">Anandi</span><span class="brand-subtitle">ART &amp; CRAFT</span></span>
+            </a>
+            <p>Create • Decorate • Inspire</p>
+        </div>
+        <nav class="footer-links" aria-label="Footer navigation">
+            <a href="index.html"><i class="fas fa-home" aria-hidden="true"></i> Home</a>
+            <a href="products.html"><i class="fas fa-store" aria-hidden="true"></i> Products</a>
+            <a href="about.html"><i class="fas fa-heart" aria-hidden="true"></i> About</a>
+            <a href="contact.html"><i class="fas fa-envelope" aria-hidden="true"></i> Contact</a>
+        </nav>
+        <p class="credit">Made with ♥ and creativity by vkdigital29</p>
+        <p class="copyright">© 2026 Anandi Art &amp; Craft. All rights reserved.</p>
+    </footer>
+    <script>
+        const menu = document.getElementById('menu');
+        const navbar = document.querySelector('.navbar');
+        function toggleMenu() {
+            const open = navbar.classList.toggle('active');
+            menu.classList.toggle('fa-bars', !open);
+            menu.classList.toggle('fa-times', open);
+            menu.setAttribute('aria-expanded', String(open));
+            menu.setAttribute('aria-label', open ? 'Close navigation menu' : 'Open navigation menu');
+        }
+        menu.addEventListener('click', toggleMenu);
+        menu.addEventListener('keydown', event => {
+            if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); toggleMenu(); }
+        });
+        document.querySelectorAll('.navbar a').forEach(link => link.addEventListener('click', () => {
+            navbar.classList.remove('active');
+            menu.classList.remove('fa-times');
+            menu.classList.add('fa-bars');
+            menu.setAttribute('aria-expanded', 'false');
+        }));
+    </script>
+</body>
+</html>

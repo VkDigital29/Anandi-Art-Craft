@@ -493,6 +493,29 @@ p {
     background: #ffffff1a;
     color: #f1c56c
 }
+.social-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 1rem;
+}
+
+.social-links a {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  border: 1px solid rgb(255 248 233 / 24%);
+  border-radius: 50%;
+  color: var(--ivory);
+  text-decoration: none;
+}
+
+.social-links a:hover {
+  border-color: var(--sunflower);
+  background: rgb(246 181 27 / 12%);
+  color: var(--sunflower);
+}
 
 .credit,.copyright h1 {
     color: #cbb8a8;

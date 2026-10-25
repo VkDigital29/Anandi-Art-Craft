@@ -36,7 +36,7 @@
 
     <nav class="navbar" aria-label="Main navigation">
         <a href="index.html"><i class="fas fa-home" aria-hidden="true"></i> Home</a>
-        <a href="products.html" class="active"><i class="fas fa-store" aria-hidden="true"></i> Products</a>
+        <a href="products4.html" class="active"><i class="fas fa-store" aria-hidden="true"></i> Products</a>
         <a href="about.html"><i class="fas fa-heart" aria-hidden="true"></i> About Us</a>
         <a href="contact.html"><i class="fas fa-envelope" aria-hidden="true"></i> Contact Us</a>
     </nav>
@@ -122,7 +122,12 @@
           </div>
 
           <div class="upi-box" id="upi-box">
-            <div id="upi-qr" aria-label="UPI payment QR code" role="img"></div>
+
+                <button type="button" class="pay-btn" id="show-qr-btn">
+                    Show QR Code
+                </button>
+                <div id="upi-qr" aria-label="UPI payment QR code" ></div>
+            </div>
             <div>
               <p style="margin:0">Scan with any UPI app to pay <strong id="upi-amount"></strong></p>
               <p style="margin:6px 0 0">UPI ID: <span class="upi-id" id="upi-id-text"></span></p>
@@ -132,7 +137,7 @@
               </div>
               <p class="pay-small" id="upi-copy-status" aria-live="polite"></p>
             </div>
-          </div>
+          
 
           <p class="pay-small">After paying, tap the button below and attach your payment screenshot in WhatsApp so we can confirm your order.</p>
         </div>
@@ -146,7 +151,7 @@
         <ul class="pay-items" id="pay-items"></ul>
         <div class="pay-total"><span>Total</span><span id="pay-total">₹0</span></div>
         <p class="pay-small">Delivery across India is included in the price. Made to order: usually ready and dispatched within 2–3 days after we confirm your payment.</p>
-        <a class="pay-edit" href="products.html">Edit cart</a>
+        <a class="pay-edit" href="products4.html">Edit cart</a>
       </section>
 
       <label class="pay-agree">
@@ -198,13 +203,10 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
 <script>
-(() => {
-  "use strict";
-
-  /* ====================================================
+/* ====================================================
      SETTINGS: edit these three lines
   ==================================================== */
-  const UPI_ID = "yourname@upi";            // your real UPI ID, e.g. anandi@okhdfcbank
+  const UPI_ID = "8600352943@kotakbank";            // your real UPI ID, e.g. anandi@okhdfcbank
   const PAYEE_NAME = "Anandi Art & Craft";  // name shown in the customer's UPI app
   const WHATSAPP_NUMBER = "918378836293";   // country code + digits only
 
@@ -307,7 +309,13 @@
   $("upi-amount").textContent = rupees(total);
   $("upi-id-text").textContent = UPI_ID;
 
-  if (!upiConfigured) {
+  
+const qrContainer = $("upi-qr");
+const showQrBtn = $("show-qr-btn");
+
+qrContainer.hidden = true;
+
+if (!upiConfigured) {
     $("upi-warning").hidden = false;
   } else if (typeof QRCode !== "undefined") {
     new QRCode($("upi-qr"), {
@@ -458,6 +466,68 @@
     }
   });
 })();
+</script>
+<script>
+    
+(function () {
+  const button = document.getElementById("show-qr-btn");
+  const qrContainer = document.getElementById("upi-qr");
+
+  if (!button || !qrContainer) return;
+
+  let generated = false;
+
+  button.addEventListener("click", function () {
+    if (typeof QRCode === "undefined") {
+      alert("QR library not loaded. Please refresh the page.");
+      return;
+    }
+
+    if (!generated) {
+      const upiId = document
+        .getElementById("upi-id-text")
+        ?.textContent.trim();
+
+      const amountText = document
+        .getElementById("upi-amount")
+        ?.textContent.trim();
+
+      const amount = amountText?.replace(/[^\d.]/g, "");
+
+      if (!upiId || !amount || !/^\d+(\.\d{1,2})?$/.test(amount)) {
+        alert("Please check the UPI ID and payment amount.");
+        return;
+      }
+
+      const params = new URLSearchParams({
+        pa: upiId,
+        pn: "Anandi Art and Craft",
+        am: amount,
+        cu: "INR"
+      });
+
+      const paymentURI = "upi://pay?" + params.toString();
+
+      qrContainer.replaceChildren();
+
+      new QRCode(qrContainer, {
+        text: paymentURI,
+        width: 220,
+        height: 220,
+        correctLevel: QRCode.CorrectLevel.M
+      });
+
+      generated = true;
+    }
+
+    qrContainer.hidden = !qrContainer.hidden;
+
+    button.textContent = qrContainer.hidden
+      ? "Show QR Code"
+      : "Hide QR Code";
+  });
+})();
+
 </script>
 
 <!-- =========================

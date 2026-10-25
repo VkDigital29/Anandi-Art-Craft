@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Checkout and pay for your handmade order from Anandi Art & Craft.">
+<meta name="robots" content="noindex">
+
+<title>Checkout - Anandi Art & Craft</title>
+
+<!-- Font Awesome -->
+<link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+<!-- Custom CSS -->
+<link rel="stylesheet" href="Css/style1.css">
+<link rel="stylesheet" href="Css/payment.css">
+
+<!-- Favicon -->
+<link rel="icon" type="image/x-icon" href="favicon/favicon48.ico">
+</head>
+
+<body>
+<div class="container">
+
+<!-- =========================
+     HEADER / NAVIGATION
+========================== -->
+<header>
+    <a href="index.html" class="brand-logo" aria-label="Anandi Art and Craft home">
+        <span class="logo-icon"><i class="fas fa-seedling" aria-hidden="true"></i></span>
+        <span class="logo-text"><span class="brand-name">Anandi</span><span class="brand-subtitle">ART &amp; CRAFT</span></span>
+    </a>
+
+    <div id="menu" class="fas fa-bars" role="button" tabindex="0" aria-label="Open navigation menu" aria-expanded="false"></div>
+
+    <nav class="navbar" aria-label="Main navigation">
+        <a href="index.html"><i class="fas fa-home" aria-hidden="true"></i> Home</a>
+        <a href="products.html" class="active"><i class="fas fa-store" aria-hidden="true"></i> Products</a>
+        <a href="about.html"><i class="fas fa-heart" aria-hidden="true"></i> About Us</a>
+        <a href="contact.html"><i class="fas fa-envelope" aria-hidden="true"></i> Contact Us</a>
+    </nav>
+</header>
+
+<main class="pay-page">
+  <h1>Checkout</h1>
+  <p class="pay-lead">Enter your delivery details, pay by UPI, then send us your order on WhatsApp.</p>
+
+  <!-- Shown when the cart is empty -->
+  <section class="pay-card pay-empty" id="pay-empty" hidden>
+    <h2>Your cart is empty</h2>
+    <p>Add something you love from our collection first.</p>
+    <a class="pay-btn" href="products.html">Browse products</a>
+  </section>
+
+
+  <form class="pay-layout" id="pay-form" novalidate hidden>
+
+    <!-- LEFT: details + payment -->
+    <div>
+      <section class="pay-card">
+        <h2>Delivery details</h2>
+
+        <div class="pay-field">
+          <label for="f-name">Full name</label>
+          <input id="f-name" name="name" type="text" autocomplete="name" required minlength="2">
+        </div>
+
+        <div class="pay-field">
+          <label for="f-phone">Mobile number</label>
+          <input id="f-phone" name="phone" type="tel" inputmode="numeric" autocomplete="tel-national"
+                 required pattern="[6-9][0-9]{9}" maxlength="10"
+                 title="Enter a 10-digit Indian mobile number">
+        </div>
+
+        <div class="pay-field">
+          <label for="f-address">Address</label>
+          <textarea id="f-address" name="address" autocomplete="street-address" required minlength="8"></textarea>
+        </div>
+
+        <div class="pay-row">
+          <div class="pay-field">
+            <label for="f-city">City</label>
+            <input id="f-city" name="city" type="text" autocomplete="address-level2" required>
+          </div>
+          <div class="pay-field">
+            <label for="f-pin">Pincode</label>
+            <input id="f-pin" name="pin" type="text" inputmode="numeric" autocomplete="postal-code"
+                   required pattern="[0-9]{6}" maxlength="6" title="Enter a 6-digit pincode">
+          </div>
+        </div>
+
+        <div class="pay-field">
+          <label for="f-notes">Notes <span class="optional">(optional)</span></label>
+          <textarea id="f-notes" name="notes" placeholder="Gift message, colour preference, delivery timing..."></textarea>
+        </div>
+      </section>
+
+      <section class="pay-card">
+        <h2>Payment</h2>
+
+        <div class="pay-methods" role="radiogroup" aria-label="Payment method">
+          <label class="pay-method">
+            <input type="radio" name="method" value="upi" checked>
+            <div>
+              <strong>Pay now by UPI</strong>
+              <span>GPay, PhonePe, Paytm or any UPI app</span>
+            </div>
+          </label>
+          <label class="pay-method">
+            <input type="radio" name="method" value="later">
+            <div>
+              <strong>Confirm on WhatsApp, pay later</strong>
+              <span>We'll share payment and delivery details in the chat</span>
+            </div>
+          </label>
+        </div>
+
+        <div id="upi-panel">
+          <div class="pay-warning" id="upi-warning" hidden>
+            UPI ID is not set yet. Open <code>payment.html</code> and set <code>UPI_ID</code> near the top of the script.
+          </div>
+
+          <div class="upi-box" id="upi-box">
+            <div id="upi-qr" aria-label="UPI payment QR code" role="img"></div>
+            <div>
+              <p style="margin:0">Scan with any UPI app to pay <strong id="upi-amount"></strong></p>
+              <p style="margin:6px 0 0">UPI ID: <span class="upi-id" id="upi-id-text"></span></p>
+              <div class="upi-actions">
+                <a class="pay-btn" id="upi-app-link" hidden>Pay in UPI app</a>
+                <button type="button" class="pay-btn secondary" id="upi-copy">Copy UPI ID</button>
+              </div>
+              <p class="pay-small" id="upi-copy-status" aria-live="polite"></p>
+            </div>
+          </div>
+
+          <p class="pay-small">After paying, tap the button below and attach your payment screenshot in WhatsApp so we can confirm your order.</p>
+        </div>
+      </section>
+    </div>
+
+    <!-- RIGHT: summary -->
+    <aside>
+      <section class="pay-card">
+        <h2>Order summary</h2>
+        <ul class="pay-items" id="pay-items"></ul>
+        <div class="pay-total"><span>Total</span><span id="pay-total">₹0</span></div>
+        <p class="pay-small">Delivery across India is included in the price. Made to order: usually ready and dispatched within 2–3 days after we confirm your payment.</p>
+        <a class="pay-edit" href="products.html">Edit cart</a>
+      </section>
+
+      <label class="pay-agree">
+        <input type="checkbox" id="f-agree" name="agree" required>
+        <span>I understand this order is handmade for me, and that it <strong>cannot be cancelled, returned, replaced or refunded</strong> once paid. I agree to the
+        <a href="refund-policy.html" target="_blank" rel="noopener">Cancellation &amp; Refund Policy</a> and
+        <a href="terms.html" target="_blank" rel="noopener">Terms</a>.</span>
+      </label>
+
+      <button type="submit" class="pay-btn full" id="pay-submit">I've paid: send order on WhatsApp</button>
+    </aside>
+  </form>
+</main>
+
+<!-- =========================
+     FOOTER
+========================== -->
+<section class="footer">
+    <div class="footer-brand">
+        <a href="index.html" class="brand-logo">
+            <span class="logo-icon"><i class="fas fa-seedling"></i></span>
+            <span class="logo-text">
+                <span class="brand-name" style="color:var(--gold)">Anandi</span>
+                <span class="brand-subtitle">ART &amp; CRAFT</span>
+            </span>
+        </a>
+        <p>Create • Decorate • Inspire</p>
+    </div>
+
+    <div class="footer-links">
+        <a href="index.html"><i class="fas fa-home"></i> Home</a>
+        <a href="products.html"><i class="fas fa-store"></i> Products</a>
+        <a href="about.html"><i class="fas fa-heart"></i> About</a>
+        <a href="contact.html"><i class="fas fa-envelope"></i> Contact</a>
+    </div>
+    <div class="footer-links">
+        <a href="shipping.html">Shipping</a>
+        <a href="refund-policy.html">Cancellation &amp; Refunds</a>
+        <a href="terms.html">Terms</a>
+    </div>
+
+    <p class="credit">Made with ♥ and creativity by vkdigital29</p>
+    <p class="credit">Copyrights Reserved © Anandi Art &amp; Craft © 2026</p>
+</section>
+
+</div>
+
+<!-- QR code generator (small library). If it fails to load, the UPI ID and app link still work. -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+<script>
+(() => {
+  "use strict";
+
+  /* ====================================================
+     SETTINGS: edit these three lines
+  ==================================================== */
+  const UPI_ID = "yourname@upi";            // your real UPI ID, e.g. anandi@okhdfcbank
+  const PAYEE_NAME = "Anandi Art & Craft";  // name shown in the customer's UPI app
+  const WHATSAPP_NUMBER = "918378836293";   // country code + digits only
+
+  const CART_KEY = "anandi-cart";
+  const ORDER_KEY = "anandi-last-order";
+
+  // Keep this list in sync with products.html (same ids, names, prices).
+  const products = [
+    { id: 1, name: "Handmade Diya Holder 2 pcs", price: 230, image: "Img/Handmade 2pc.jpg",  available: true },
+    { id: 2, name: "Handmade Diya Holder 6 pcs", price: 550, image: "Img/Handmade 6pcs.jpg", available: true }
+  ];
+
+  /* ==================================================== */
+
+  const $ = id => document.getElementById(id);
+  const form = $("pay-form");
+  const emptyBox = $("pay-empty");
+  const itemsEl = $("pay-items");
+  const submitBtn = $("pay-submit");
+  const upiPanel = $("upi-panel");
+
+  const rupees = n => "₹" + n.toLocaleString("en-IN");
+  const findProduct = id => products.find(p => p.id === id);
+
+  function el(tag, className, text) {
+    const node = document.createElement(tag);
+    if (className) node.className = className;
+    if (text !== undefined) node.textContent = text;
+    return node;
+  }
+
+  // ---------- Read the cart saved by products.html ----------
+  function loadCart() {
+    try {
+      const saved = JSON.parse(localStorage.getItem(CART_KEY)) || {};
+      const clean = {};
+      Object.entries(saved).forEach(([id, qty]) => {
+        const product = findProduct(Number(id));
+        if (product && product.available && Number.isInteger(qty) && qty > 0) {
+          clean[id] = Math.min(qty, 10);
+        }
+      });
+      return clean;
+    } catch {
+      return {};
+    }
+  }
+
+  const cart = loadCart();
+  const ids = Object.keys(cart).map(Number);
+
+  const total = ids.reduce((sum, id) => sum + findProduct(id).price * cart[id], 0);
+
+  // One order ID per visit, e.g. AAC-251025-4K7P
+  const orderId = "AAC-" +
+    new Date().toISOString().slice(2, 10).replace(/-/g, "") + "-" +
+    Math.random().toString(36).slice(2, 6).toUpperCase();
+
+  // ---------- Empty cart ----------
+  if (!ids.length) {
+    emptyBox.hidden = false;
+    return;
+  }
+  form.hidden = false;
+
+  // ---------- Summary ----------
+  ids.forEach(id => {
+    const product = findProduct(id);
+    const qty = cart[id];
+
+    const li = el("li", "pay-item");
+    const img = el("img");
+    img.src = product.image;
+    img.alt = "";
+    img.addEventListener("error", () => { img.style.visibility = "hidden"; });
+
+    const info = el("div");
+    info.append(
+      el("p", "pay-item-name", product.name),
+      el("p", "pay-item-meta", rupees(product.price) + " × " + qty)
+    );
+
+    li.append(img, info, el("span", "pay-item-total", rupees(product.price * qty)));
+    itemsEl.appendChild(li);
+  });
+
+  $("pay-total").textContent = rupees(total);
+
+  // ---------- UPI ----------
+  const upiConfigured =
+    /^[\w.\-]{2,}@[a-zA-Z][a-zA-Z0-9.\-]{1,}$/.test(UPI_ID) && UPI_ID !== "yourname@upi";
+
+  const upiLink =
+    "upi://pay?pa=" + encodeURIComponent(UPI_ID) +
+    "&pn=" + encodeURIComponent(PAYEE_NAME) +
+    "&am=" + total.toFixed(2) +
+    "&cu=INR" +
+    "&tn=" + encodeURIComponent("Order " + orderId);
+
+  $("upi-amount").textContent = rupees(total);
+  $("upi-id-text").textContent = UPI_ID;
+
+  if (!upiConfigured) {
+    $("upi-warning").hidden = false;
+  } else if (typeof QRCode !== "undefined") {
+    new QRCode($("upi-qr"), {
+      text: upiLink,
+      width: 152,
+      height: 152,
+      correctLevel: QRCode.CorrectLevel.M
+    });
+  } else {
+    $("upi-qr").hidden = true; // QR library didn't load; ID + app link still work
+  }
+
+  // "Pay in UPI app" only makes sense on phones/tablets
+  if (upiConfigured && window.matchMedia("(pointer: coarse)").matches) {
+    const appLink = $("upi-app-link");
+    appLink.href = upiLink;
+    appLink.hidden = false;
+  }
+
+  $("upi-copy").addEventListener("click", async () => {
+    const status = $("upi-copy-status");
+    try {
+      await navigator.clipboard.writeText(UPI_ID);
+      status.textContent = "UPI ID copied.";
+    } catch {
+      status.textContent = "Couldn't copy. Please select the UPI ID and copy it.";
+    }
+  });
+
+  // ---------- Payment method toggle ----------
+  function currentMethod() {
+    return form.elements.method.value;
+  }
+
+  function updateMethod() {
+    const upi = currentMethod() === "upi";
+    upiPanel.hidden = !upi;
+    submitBtn.textContent = upi
+      ? "I've paid: send order on WhatsApp"
+      : "Send order on WhatsApp";
+  }
+
+  form.querySelectorAll('input[name="method"]').forEach(r =>
+    r.addEventListener("change", updateMethod)
+  );
+  updateMethod();
+
+  // Phone and pincode: digits only
+  ["f-phone", "f-pin"].forEach(id => {
+    $(id).addEventListener("input", e => {
+      e.target.value = e.target.value.replace(/\D/g, "");
+    });
+  });
+
+  // ---------- Build + send the WhatsApp message ----------
+  function buildMessage(data) {
+    const lines = ids.map((id, i) => {
+      const p = findProduct(id);
+      return (i + 1) + ". " + p.name + " × " + cart[id] + " = " + rupees(p.price * cart[id]);
+    });
+
+    const upi = currentMethod() === "upi";
+
+    return [
+      "Hello Anandi Art & Craft! New order " + orderId,
+      "",
+      lines.join("\n"),
+      "",
+      "Total: " + rupees(total),
+      "Payment: " + (upi ? "Paid by UPI (screenshot attached)" : "Will pay later, please share details"),
+      "Customer agreed: handmade to order, no cancellation/refund/return/replacement after payment.",
+      "",
+      "Deliver to:",
+      data.name + " (" + data.phone + ")",
+      data.address + ", " + data.city + " - " + data.pin,
+      data.notes ? "\nNotes: " + data.notes : ""
+    ].join("\n").trim();
+  }
+
+  form.addEventListener("submit", event => {
+    event.preventDefault();
+
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+
+    if (!/^91\d{10}$/.test(WHATSAPP_NUMBER)) {
+      alert("Please set the business WhatsApp number in payment.html first.");
+      return;
+    }
+
+    if (currentMethod() === "upi" && !upiConfigured) {
+      alert("Please set your UPI ID in payment.html first, or choose 'pay later'.");
+      return;
+    }
+
+    const data = {
+      name: form.elements.name.value.trim(),
+      phone: form.elements.phone.value.trim(),
+      address: form.elements.address.value.trim(),
+      city: form.elements.city.value.trim(),
+      pin: form.elements.pin.value.trim(),
+      notes: form.elements.notes.value.trim()
+    };
+
+    const link = "https://wa.me/" + WHATSAPP_NUMBER +
+      "?text=" + encodeURIComponent(buildMessage(data));
+
+    // Open WhatsApp via a real link click (more reliable than window.open on phones)
+    const a = document.createElement("a");
+    a.href = link;
+    a.target = "_blank";
+    a.rel = "noopener noreferrer";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+
+    // Save the order for confirmation.html (kept for this browser tab only)
+    const order = {
+      id: orderId,
+      createdAt: new Date().toISOString(),
+      method: currentMethod(),
+      total: total,
+      items: ids.map(id => {
+        const p = findProduct(id);
+        return { name: p.name, price: p.price, qty: cart[id], image: p.image };
+      }),
+      customer: data,
+      whatsappLink: link
+    };
+
+    let saved = false;
+    for (const store of [sessionStorage, localStorage]) {
+      try { store.setItem(ORDER_KEY, JSON.stringify(order)); saved = true; break; }
+      catch { /* try the next store */ }
+    }
+
+    // Clear the cart, then show the confirmation page
+    try { localStorage.removeItem(CART_KEY); } catch { /* ignore */ }
+
+    if (saved) {
+      window.location.href = "confirmation.html";
+    } else {
+      // Storage blocked: WhatsApp already opened, so just stop here
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Order sent. Check WhatsApp.";
+    }
+  });
+})();
+</script>
+
+<!-- =========================
+     MOBILE MENU SCRIPT
+========================== -->
+<script>
+    const menu = document.querySelector('#menu');
+    const navbar = document.querySelector('.navbar');
+
+    menu.addEventListener('click', () => {
+        navbar.classList.toggle('active');
+        menu.classList.toggle('fa-bars');
+        menu.classList.toggle('fa-times');
+    });
+
+    document.querySelectorAll('.navbar a').forEach(link => {
+        link.addEventListener('click', () => {
+            navbar.classList.remove('active');
+            menu.classList.add('fa-bars');
+            menu.classList.remove('fa-times');
+        });
+    });
+</script>
+
+</body>
+</html>

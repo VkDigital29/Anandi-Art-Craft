@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Your order confirmation from Anandi Art & Craft.">
+<meta name="robots" content="noindex">
+
+<title>Order Confirmation - Anandi Art & Craft</title>
+
+<!-- Font Awesome -->
+<link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+<!-- Custom CSS -->
+<link rel="stylesheet" href="Css/style1.css">
+<link rel="stylesheet" href="Css/payment.css">
+
+<!-- Favicon -->
+<link rel="icon" type="image/x-icon" href="favicon/favicon48.ico">
+</head>
+
+<body>
+<div class="container">
+
+<!-- =========================
+     HEADER / NAVIGATION
+========================== -->
+<header>
+    <a href="index.html" class="brand-logo" aria-label="Anandi Art and Craft home">
+        <span class="logo-icon"><i class="fas fa-seedling" aria-hidden="true"></i></span>
+        <span class="logo-text"><span class="brand-name">Anandi</span><span class="brand-subtitle">ART &amp; CRAFT</span></span>
+    </a>
+
+    <div id="menu" class="fas fa-bars" role="button" tabindex="0" aria-label="Open navigation menu" aria-expanded="false"></div>
+
+    <nav class="navbar" aria-label="Main navigation">
+        <a href="index.html"><i class="fas fa-home" aria-hidden="true"></i> Home</a>
+        <a href="products.html" class="active"><i class="fas fa-store" aria-hidden="true"></i> Products</a>
+        <a href="about.html"><i class="fas fa-heart" aria-hidden="true"></i> About Us</a>
+        <a href="contact.html"><i class="fas fa-envelope" aria-hidden="true"></i> Contact Us</a>
+    </nav>
+</header>
+
+<main class="pay-page">
+
+  <!-- No order found (page opened directly, or a new browser session) -->
+  <section class="pay-card pay-empty" id="conf-empty" hidden>
+    <h2>No recent order found</h2>
+    <p>If you just placed an order, check your WhatsApp chat with us. Otherwise, start a new order below.</p>
+    <a class="pay-btn" href="products.html">Browse products</a>
+  </section>
+
+  <div id="conf-content" hidden>
+
+    <section class="conf-hero">
+      <div class="conf-check" aria-hidden="true"><i class="fas fa-check"></i></div>
+      <h1>Order received</h1>
+      <p class="pay-lead" id="conf-lead"></p>
+    </section>
+
+    <div class="pay-layout">
+
+      <!-- LEFT: next steps + delivery -->
+      <div>
+        <section class="pay-card">
+          <h2>What happens next</h2>
+          <ol class="conf-steps" id="conf-steps"></ol>
+        </section>
+
+        <section class="pay-card">
+          <h2>Delivery details</h2>
+          <dl class="conf-meta">
+            <div><dt>Name</dt><dd id="c-name"></dd></div>
+            <div><dt>Mobile</dt><dd id="c-phone"></dd></div>
+            <div><dt>Address</dt><dd id="c-address"></dd></div>
+            <div id="c-notes-row" hidden><dt>Notes</dt><dd id="c-notes"></dd></div>
+          </dl>
+        </section>
+      </div>
+
+      <!-- RIGHT: order summary -->
+      <aside>
+        <section class="pay-card">
+          <h2>Order summary</h2>
+
+          <dl class="conf-meta">
+            <div><dt>Order ID</dt><dd><strong id="c-id"></strong></dd></div>
+            <div><dt>Placed on</dt><dd id="c-date"></dd></div>
+            <div><dt>Payment</dt><dd id="c-method"></dd></div>
+          </dl>
+
+          <ul class="pay-items" id="c-items"></ul>
+          <div class="pay-total"><span>Total</span><span id="c-total"></span></div>
+          <p class="pay-small">Delivery across India is included in the price. Handmade to order: <a href="refund-policy.html">no cancellation or refund after payment</a>.</p>
+        </section>
+
+        <div class="conf-actions">
+          <a class="pay-btn full" id="c-whatsapp" target="_blank" rel="noopener noreferrer">Open WhatsApp chat</a>
+          <button type="button" class="pay-btn secondary full" id="c-print">Print or save as PDF</button>
+          <a class="pay-edit" href="products.html">Continue shopping</a>
+        </div>
+      </aside>
+    </div>
+  </div>
+</main>
+
+<!-- =========================
+     FOOTER
+========================== -->
+<section class="footer">
+    <div class="footer-brand">
+        <a href="index.html" class="brand-logo">
+            <span class="logo-icon"><i class="fas fa-seedling"></i></span>
+            <span class="logo-text">
+                <span class="brand-name" style="color:var(--gold)">Anandi</span>
+                <span class="brand-subtitle">ART &amp; CRAFT</span>
+            </span>
+        </a>
+        <p>Create • Decorate • Inspire</p>
+    </div>
+
+    <div class="footer-links">
+        <a href="index.html"><i class="fas fa-home"></i> Home</a>
+        <a href="products.html"><i class="fas fa-store"></i> Products</a>
+        <a href="about.html"><i class="fas fa-heart"></i> About</a>
+        <a href="contact.html"><i class="fas fa-envelope"></i> Contact</a>
+    </div>
+    <div class="footer-links">
+        <a href="shipping.html">Shipping</a>
+        <a href="refund-policy.html">Cancellation &amp; Refunds</a>
+        <a href="terms.html">Terms</a>
+    </div>
+
+    <p class="credit">Made with ♥ and creativity by vkdigital29</p>
+    <p class="credit">Copyrights Reserved © Anandi Art &amp; Craft © 2026</p>
+</section>
+
+</div>
+
+<script>
+(() => {
+  "use strict";
+
+  const ORDER_KEY = "anandi-last-order";
+  const $ = id => document.getElementById(id);
+  const rupees = n => "₹" + Number(n).toLocaleString("en-IN");
+
+  function el(tag, className, text) {
+    const node = document.createElement(tag);
+    if (className) node.className = className;
+    if (text !== undefined) node.textContent = text;
+    return node;
+  }
+
+  // ---------- Read the order saved by payment.html ----------
+  function loadOrder() {
+    for (const store of [sessionStorage, localStorage]) {
+      try {
+        const raw = store.getItem(ORDER_KEY);
+        if (raw) return JSON.parse(raw);
+      } catch { /* try the next store */ }
+    }
+    return null;
+  }
+
+  const order = loadOrder();
+  const valid = order && order.id && Array.isArray(order.items) && order.items.length && order.customer;
+
+  if (!valid) {
+    $("conf-empty").hidden = false;
+    return;
+  }
+
+  $("conf-content").hidden = false;
+
+  const paidByUpi = order.method === "upi";
+  const firstName = String(order.customer.name || "").split(" ")[0];
+
+  // ---------- Hero ----------
+  $("conf-lead").textContent =
+    "Thank you" + (firstName ? ", " + firstName : "") + ". Your order ID is " + order.id + ".";
+
+  // ---------- Steps (depend on payment choice) ----------
+  const steps = paidByUpi
+    ? [
+        "If you haven't already, send your payment screenshot in our WhatsApp chat.",
+        "We check the payment and confirm your order on WhatsApp.",
+        "We make your order by hand. It is usually ready and dispatched within 2–3 days of confirmation.",
+        "We share delivery updates on WhatsApp."
+      ]
+    : [
+        "We reply on WhatsApp with payment details.",
+        "Pay by UPI and send your screenshot. We start making your order once payment is confirmed.",
+        "We make your order by hand. It is usually ready and dispatched within 2–3 days of confirmation.",
+        "We share delivery updates on WhatsApp."
+      ];
+
+  steps.forEach(text => $("conf-steps").appendChild(el("li", "", text)));
+
+  // ---------- Delivery ----------
+  const c = order.customer;
+  $("c-name").textContent = c.name || "";
+  $("c-phone").textContent = c.phone || "";
+  $("c-address").textContent = [c.address, c.city, c.pin].filter(Boolean).join(", ");
+
+  if (c.notes) {
+    $("c-notes").textContent = c.notes;
+    $("c-notes-row").hidden = false;
+  }
+
+  // ---------- Summary ----------
+  $("c-id").textContent = order.id;
+
+  const when = new Date(order.createdAt);
+  $("c-date").textContent = isNaN(when)
+    ? ""
+    : when.toLocaleString("en-IN", { dateStyle: "medium", timeStyle: "short" });
+
+  $("c-method").textContent = paidByUpi
+    ? "UPI, awaiting our confirmation"
+    : "Pay later, details on WhatsApp";
+
+  order.items.forEach(item => {
+    const li = el("li", "pay-item");
+
+    const img = el("img");
+    img.src = item.image || "";
+    img.alt = "";
+    img.addEventListener("error", () => { img.style.visibility = "hidden"; });
+
+    const info = el("div");
+    info.append(
+      el("p", "pay-item-name", item.name),
+      el("p", "pay-item-meta", rupees(item.price) + " × " + item.qty)
+    );
+
+    li.append(img, info, el("span", "pay-item-total", rupees(item.price * item.qty)));
+    $("c-items").appendChild(li);
+  });
+
+  $("c-total").textContent = rupees(order.total);
+
+  // ---------- Actions ----------
+  const wa = $("c-whatsapp");
+  if (order.whatsappLink && order.whatsappLink.startsWith("https://wa.me/")) {
+    wa.href = order.whatsappLink;
+  } else {
+    wa.hidden = true;
+  }
+
+  $("c-print").addEventListener("click", () => window.print());
+
+  document.title = "Order " + order.id + " - Anandi Art & Craft";
+})();
+</script>
+
+<!-- =========================
+     MOBILE MENU SCRIPT
+========================== -->
+<script>
+    const menu = document.querySelector('#menu');
+    const navbar = document.querySelector('.navbar');
+
+    menu.addEventListener('click', () => {
+        navbar.classList.toggle('active');
+        menu.classList.toggle('fa-bars');
+        menu.classList.toggle('fa-times');
+    });
+
+    document.querySelectorAll('.navbar a').forEach(link => {
+        link.addEventListener('click', () => {
+            navbar.classList.remove('active');
+            menu.classList.add('fa-bars');
+            menu.classList.remove('fa-times');
+        });
+    });
+</script>
+
+</body>
+</html>

@@ -122,22 +122,40 @@
           </div>
 
           <div class="upi-box" id="upi-box">
-              <p style="margin:6px 0 0">UPI ID:<span class="upi-id" id="upi-id-text"></span></p>
 
                 <button type="button" class="pay-btn" id="show-qr-btn">
-                    Show QR Code
-                </button>
-                <div id="upi-qr" aria-label="UPI payment QR code" ></div>
-            </div>
-            <div>
-              <p style="margin:0">Scan with any UPI app to pay <strong id="upi-amount"></strong></p>
-              
-              <div class="upi-actions">
-                <a class="pay-btn" id="upi-app-link" hidden>Pay in UPI app</a>
-                <button type="button" class="pay-btn secondary" id="upi-copy">Copy UPI ID</button>
-              </div>
-              <p class="pay-small" id="upi-copy-status" aria-live="polite"></p>
-            </div>
+    Show QR Code
+</button>
+
+<div id="qr-payment-details" hidden>
+
+    <div id="upi-qr" aria-label="UPI payment QR code"></div>
+
+    <p style="margin:0">
+        Scan with any UPI app to pay
+        <strong id="upi-amount"></strong>
+    </p>
+
+    <p style="margin:6px 0 0">
+        UPI ID:
+        <span class="upi-id" id="upi-id-text"></span>
+    </p>
+
+    <div class="upi-actions">
+        <a class="pay-btn" id="upi-app-link" hidden>
+            Pay in UPI app
+        </a>
+
+        <button type="button" class="pay-btn secondary" id="upi-copy">
+            Copy UPI ID
+        </button>
+    </div>
+
+    <p class="pay-small" id="upi-copy-status" aria-live="polite"></p>
+
+</div>
+
+</div>
           
 
           <p class="pay-small">After paying, tap the button below and attach your payment screenshot in WhatsApp so we can confirm your order.</p>
@@ -206,6 +224,7 @@
 <script>
     (() => {
   "use strict";
+    
 /* ====================================================
      SETTINGS: edit these three lines
   ==================================================== */
@@ -315,22 +334,62 @@
   
 const qrContainer = $("upi-qr");
 const showQrBtn = $("show-qr-btn");
+const qrPaymentDetails = $("qr-payment-details");
 
-qrContainer.hidden = true;
+qrPaymentDetails.hidden = true;
 
 if (!upiConfigured) {
-    $("upi-warning").hidden = false;
-  } else if (typeof QRCode !== "undefined") {
-    new QRCode($("upi-qr"), {
-      text: upiLink,
-      width: 152,
-      height: 152,
-      correctLevel: QRCode.CorrectLevel.M
-    });
-  } else {
-    $("upi-qr").hidden = true; // QR library didn't load; ID + app link still work
-  }
+$("upi-warning").hidden = false;
+}
 
+let qrGenerated = false;
+
+showQrBtn.addEventListener("click", function () {
+if (qrPaymentDetails.hidden) {
+
+    if (!upiConfigured) {
+        $("upi-warning").hidden = false;
+        return;
+    }
+
+    if (typeof QRCode === "undefined") {
+        alert("QR library failed to load. Please refresh the page.");
+        return;
+    }
+
+    // Generate the QR only once, using the existing order payment URI.
+    if (!qrGenerated) {
+        qrContainer.replaceChildren();
+
+        new QRCode(qrContainer, {
+            text: upiLink,
+            width: 152,
+            height: 152,
+            correctLevel: QRCode.CorrectLevel.M
+        });
+
+        qrGenerated = true;
+    }
+
+    // Reveal QR, UPI ID and payment actions together.
+    $("upi-id-text").textContent = UPI_ID;
+    qrPaymentDetails.hidden = false;
+    showQrBtn.textContent = "Hide QR Code";
+
+} else {
+    // Hide all payment details together.
+    qrPaymentDetails.hidden = true;
+    showQrBtn.textContent = "Show QR Code";
+}
+
+});
+
+// The app link uses the same payment URI and order amount.
+if (upiConfigured && window.matchMedia("(pointer: coarse)").matches) {
+const appLink = $("upi-app-link");
+appLink.href = upiLink;
+appLink.hidden = false;
+}
   // "Pay in UPI app" only makes sense on phones/tablets
   if (upiConfigured && window.matchMedia("(pointer: coarse)").matches) {
     const appLink = $("upi-app-link");
@@ -469,68 +528,6 @@ if (!upiConfigured) {
     }
   });
 })();
-</script>
-<script>
-    
-(function () {
-  const button = document.getElementById("show-qr-btn");
-  const qrContainer = document.getElementById("upi-qr");
-
-  if (!button || !qrContainer) return;
-
-  let generated = false;
-
-  button.addEventListener("click", function () {
-    if (typeof QRCode === "undefined") {
-      alert("QR library not loaded. Please refresh the page.");
-      return;
-    }
-
-    if (!generated) {
-      const upiId = document
-        .getElementById("upi-id-text")
-        ?.textContent.trim();
-
-      const amountText = document
-        .getElementById("upi-amount")
-        ?.textContent.trim();
-
-      const amount = amountText?.replace(/[^\d.]/g, "");
-
-      if (!upiId || !amount || !/^\d+(\.\d{1,2})?$/.test(amount)) {
-        alert("Please check the UPI ID and payment amount.");
-        return;
-      }
-
-      const params = new URLSearchParams({
-        pa: upiId,
-        pn: "Anandi Art and Craft",
-        am: amount,
-        cu: "INR"
-      });
-
-      const paymentURI = "upi://pay?" + params.toString();
-
-      qrContainer.replaceChildren();
-
-      new QRCode(qrContainer, {
-        text: paymentURI,
-        width: 220,
-        height: 220,
-        correctLevel: QRCode.CorrectLevel.M
-      });
-
-      generated = true;
-    }
-
-    qrContainer.hidden = !qrContainer.hidden;
-
-    button.textContent = qrContainer.hidden
-      ? "Show QR Code"
-      : "Hide QR Code";
-  });
-})();
-
 </script>
 
 <!-- =========================

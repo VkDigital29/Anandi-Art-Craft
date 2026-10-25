@@ -606,26 +606,3 @@
   renderProducts();
   renderCart();
 })();
-</script>
-
-<!-- =========================
-     MOBILE MENU SCRIPT
-========================== -->
-<script>
-    const menu = document.querySelector('#menu');
-    const navbar = document.querySelector('.navbar');
-
-    menu.addEventListener('click', () => {
-        navbar.classList.toggle('active');
-        menu.classList.toggle('fa-bars');
-        menu.classList.toggle('fa-times');
-    });
-
-    /* Close mobile menu after clicking a link */
-    document.querySelectorAll('.navbar a').forEach(link => {
-        link.addEventListener('click', () => {
-            navbar.classList.remove('active');
-            menu.classList.add('fa-bars');
-            menu.classList.remove('fa-times');
-        });
-    });

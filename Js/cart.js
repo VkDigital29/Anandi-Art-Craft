@@ -113,6 +113,17 @@
       badge: "Bestseller",
       available: true
     },
+    {
+      id: 12,
+      name: "test",
+      description: "A colourful decorative accent for your space.",
+      price: 1,
+      category: "Home Decor",
+      image: "Img/Handmade 2pc.jpg",
+      badge: "Bestseller",
+      available: true
+    },
+    
   ];
 
   // Business WhatsApp number: country code + digits only.
